@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""README.md -> index.html (GitHub Pages 용)
+"""README.md -> manual.html (GitHub Pages 용)
 
 GitHub Pages(Jekyll)는 ```mermaid 블록을 그려 주지 않으므로, README 를 미리 HTML 로
 변환하고 mermaid.js 를 붙인 한 장 페이지를 만든다.
@@ -16,7 +16,7 @@ import markdown
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "README.md"
-DST = ROOT / "index.html"
+DST = ROOT / "manual.html"   # index.html 은 손으로 쓴 쇼케이지 페이지이므로 덮어쓰지 않는다
 
 text = SRC.read_text(encoding="utf-8")
 
