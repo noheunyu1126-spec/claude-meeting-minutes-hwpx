@@ -106,18 +106,6 @@ h2 .num{color:var(--accent);font-variant-numeric:tabular-nums;margin-right:9px;
 .fstep b{display:block;font-size:14px;margin:4px 0 4px}
 .fstep span{font-size:12.5px;color:var(--ink-3);line-height:1.55;display:block}
 
-/* ---------------- before/after ---------------- */
-.ba{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
-@media(max-width:760px){.ba{grid-template-columns:1fr}.ba .arrow{transform:rotate(90deg);margin:0 auto}}
-.ba .arrow{font-size:23px;color:var(--accent);font-weight:700}
-.ba .box{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
-.ba .box h4{margin:0 0 9px;font-size:13px;letter-spacing:.05em;color:var(--ink-3)}
-.ba .box p{margin:0;font-size:14px;color:var(--ink-2)}
-.ba .box .big{font-size:25px;font-weight:800;color:var(--ink);letter-spacing:-.02em;
-  display:block;margin-bottom:5px}
-.ba .box.after{border-color:var(--accent)}
-.ba .box.after .big{color:var(--accent)}
-
 /* ---------------- code ---------------- */
 pre{margin:0;background:#0f1319;color:#dde4ee;border:1px solid #2a313b;border-radius:10px;
   padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.7}
@@ -200,7 +188,6 @@ footer a{color:var(--accent)}
 
 <div class="wrap">
 
-<!-- =================== 1. 미션 대응 =================== -->
 <section id="mission">
   <h2><span class="num">01</span>미션 요구사항 대응</h2>
   <p class="sub">4회차 미션 「문서 작성 에이전트 + 서브에이전트·Skill」 에 대해 만든 것과,
@@ -242,30 +229,25 @@ footer a{color:var(--accent)}
   </div>
 </section>
 
-<!-- =================== 2. 문제 =================== -->
-<section id="why">
-  <h2><span class="num">02</span>무엇을 줄였나</h2>
-  <p class="sub">간담회·보고회가 끝나면 발표자료를 열어 놓고 회의록 양식에 옮겨 적는 일이 남습니다.
-    양식을 맞추고, 표를 다시 그리고, 캡처를 잘라 붙이는 데 시간이 듭니다.</p>
-  <div class="ba">
-    <div class="box">
-      <h4>기존</h4>
-      <span class="big">손으로 1~2시간</span>
-      <p>발표자료를 넘겨 보며 요약 → 양식 파일에 옮겨 적기 →
-        글머리·들여쓰기 맞추기 → 표 다시 그리기 → 화면 캡처 잘라 붙이기</p>
-    </div>
-    <div class="arrow">→</div>
-    <div class="box after">
-      <h4>지금</h4>
-      <span class="big">명령 한 줄</span>
-      <p><code>/회의록 ○○ 간담회 ./자료.pdf</code> —
-        자료를 읽고 본문을 쓰고 그림까지 골라 넣은 HWPX 와 확인용 PDF 가 나옵니다.
-        고칠 때는 중간 산출물인 개요 <code>.txt</code> 만 손보면 됩니다.</p>
-    </div>
+<section id="use">
+  <h2><span class="num">02</span>구동 방법</h2>
+  <p class="sub">Claude Code 에서 슬래시 커맨드 한 줄로 실행합니다.
+    제목과 자료 경로를 주면 자료를 읽고 본문을 쓰고 그림까지 골라 넣습니다.</p>
+  <div class="card">
+    <pre>/회의록 ○○ 추진방향 검토를 위한 간담회  ./자료.pdf
+
+<span class="c"># 인자 없이 실행하면 폴더를 훑어 후보 회의를 찾아 물어봅니다</span>
+/회의록</pre>
+    <ul style="margin-top:15px">
+      <li>자료는 <b>발표자료 PDF · 보고서 · 회의 메모 · 붙여넣은 텍스트</b> 무엇이든 됩니다.
+        스캔 PDF 는 쪽을 이미지로 읽습니다.</li>
+      <li>일시·장소처럼 자료에서 확인되지 않는 항목은 <b>한 번에 모아</b> 물어봅니다.</li>
+      <li>결과는 자료가 있던 폴더에 <code>.hwpx</code> · 확인용 <code>.pdf</code> ·
+        개요 <code>.txt</code> 가 함께 생깁니다. 고칠 때는 <b>개요 파일만</b> 손보면 됩니다.</li>
+    </ul>
   </div>
 </section>
 
-<!-- =================== 3. 동작 =================== -->
 <section id="how">
   <h2><span class="num">03</span>동작방식</h2>
   <p class="sub">사람이 확인하고 고칠 수 있도록 중간에 <b>개요 텍스트</b>를 남기는 것이 핵심입니다.
@@ -279,7 +261,6 @@ footer a{color:var(--accent)}
   </div>
 </section>
 
-<!-- =================== 4. 결과물 =================== -->
 <section id="result">
   <h2><span class="num">04</span>실제 결과물</h2>
   <p class="sub">발표자료 PDF 를 넣으면 개요를 거쳐 회의록이 나옵니다.
@@ -351,30 +332,10 @@ footer a{color:var(--accent)}
   </div>
 </section>
 
-<!-- =================== 5. 사용법 =================== -->
-<section id="use">
-  <h2><span class="num">05</span>구동 방법</h2>
-  <p class="sub">Claude Code 에서 슬래시 커맨드 한 줄로 실행합니다.
-    제목과 자료 경로를 주면 자료를 읽고 본문을 쓰고 그림까지 골라 넣습니다.</p>
-  <div class="card">
-    <pre>/회의록 ○○ 추진방향 검토를 위한 간담회  ./자료.pdf
-
-<span class="c"># 인자 없이 실행하면 폴더를 훑어 후보 회의를 찾아 물어봅니다</span>
-/회의록</pre>
-    <ul style="margin-top:15px">
-      <li>자료는 <b>발표자료 PDF · 보고서 · 회의 메모 · 붙여넣은 텍스트</b> 무엇이든 됩니다.
-        스캔 PDF 는 쪽을 이미지로 읽습니다.</li>
-      <li>일시·장소처럼 자료에서 확인되지 않는 항목은 <b>한 번에 모아</b> 물어봅니다.</li>
-      <li>결과는 자료가 있던 폴더에 <code>.hwpx</code> · 확인용 <code>.pdf</code> ·
-        개요 <code>.txt</code> 가 함께 생깁니다. 고칠 때는 <b>개요 파일만</b> 손보면 됩니다.</li>
-    </ul>
-  </div>
-</section>
 
 
-<!-- =================== 7. 구성 =================== -->
 <section id="layout">
-  <h2><span class="num">06</span>저장소 구성</h2>
+  <h2><span class="num">05</span>저장소 구성</h2>
   <div class="card">
 <p class="tree"><b>commands/회의록.md</b>            슬래시 커맨드 — 자료 해석부터 검증까지의 진행 순서
 <b>agents/meeting-minutes.md</b>     서브에이전트 — 회의록 작성 전담
@@ -392,9 +353,8 @@ footer a{color:var(--accent)}
   </div>
 </section>
 
-<!-- =================== 8. 설치 =================== -->
 <section id="install">
-  <h2><span class="num">07</span>설치</h2>
+  <h2><span class="num">06</span>설치</h2>
   <p class="sub">저장소를 내려받아 설치 스크립트를 실행하면 <code>~/.claude</code> 아래로 복사됩니다.</p>
   <div class="grid2">
     <div class="card">
