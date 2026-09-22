@@ -50,6 +50,13 @@ h1 small{display:block;font-size:.45em;font-weight:500;color:var(--ink-3);
   letter-spacing:0;margin-top:9px}
 .lede{margin:0;font-size:clamp(15px,2.3vw,17.5px);color:var(--ink-2);max-width:60ch}
 .lede b{color:var(--ink)}
+/* 히어로 한 줄 명령 */
+.heroline{margin-top:18px}
+.heroline code{display:inline-block;background:#0f1319;border:1px solid #2a313b;
+  border-radius:9px;padding:11px 16px;font-family:var(--mono);font-size:13.5px;
+  color:#7fb0f0;line-height:1.6;white-space:normal;word-break:normal}
+.heroline .t{color:#dde4ee}
+.heroline .f{color:#9ad39a}
 .btns{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
 .btn{display:inline-flex;align-items:center;gap:7px;border-radius:9px;font-size:14px;
   text-decoration:none;padding:9px 17px;border:1px solid var(--line);
@@ -171,12 +178,15 @@ footer a{color:var(--accent)}
   <div class="wrap">
     <span class="badge">AI 마에스트로 자율 스터디 · 4회차 미션</span>
     <h1>회의록 작성 에이전트
-      <small>발표자료 PDF 하나를 넣으면 「회의록」 양식 한글 문서가 나옵니다</small></h1>
+      <small>참고자료 PDF 와 회의록 제목, 한 줄이면 됩니다</small></h1>
     <p class="lede">
-      회의 제목과 자료를 주면 <b>자료를 읽고 본문을 쓰고</b>, PDF 안의 개념도·화면 캡처를
-      <b>찾아 골라 캡션까지 달아</b> 관공서 「회의록」 양식 그대로 HWPX 문서를 만듭니다.
-      서식은 기존 양식 파일의 자원을 그대로 참조하므로 글꼴·여백·표·쪽번호가 원본과 같습니다.
+      명령 한 줄에 <b>제목과 참고자료 PDF</b> 만 주면, 자료를 읽어 본문을 쓰고
+      PDF 안의 그림까지 골라 넣은 「회의록」 양식 한글(HWPX) 문서를 만들어 줍니다.
     </p>
+    <div class="heroline">
+      <code>/회의록 <span class="t">○○ 추진방향 검토를 위한 간담회</span>
+        <span class="f">./자료.pdf</span></code>
+    </div>
     <div class="btns">
       <a class="btn pri" href="https://github.com/noheunyu1126-spec/claude-meeting-minutes-hwpx">GitHub 저장소 ↗</a>
       <a class="btn" href="#result">결과물 보기</a>
@@ -188,49 +198,9 @@ footer a{color:var(--accent)}
 
 <div class="wrap">
 
-<section id="mission">
-  <h2><span class="num">01</span>미션 요구사항 대응</h2>
-  <p class="sub">4회차 미션 「문서 작성 에이전트 + 서브에이전트·Skill」 에 대해 만든 것과,
-    저장소 안에서 어디에 있는지입니다.</p>
-  <div class="card">
-    <table class="mission">
-      <thead><tr><th>요구</th><th>만든 것</th><th>위치</th><th></th></tr></thead>
-      <tbody>
-        <tr>
-          <td>문서 작성<br>에이전트</td>
-          <td><b>/회의록</b> 슬래시 커맨드 — 제목과 자료 경로를 주면 자료 읽기 → 빈 항목 질문 →
-            본문 작성 → 그림 선별 → 빌드 → 렌더 검증까지 한 번에 수행</td>
-          <td><code>commands/회의록.md</code></td>
-          <td class="chk">✔</td>
-        </tr>
-        <tr>
-          <td>서브에이전트</td>
-          <td><b>meeting-minutes</b> — 회의록 작성만 전담하는 에이전트.
-            자료 해석·문체·그림 선별 기준을 따로 갖고 동작</td>
-          <td><code>agents/meeting-minutes.md</code></td>
-          <td class="chk">✔</td>
-        </tr>
-        <tr>
-          <td>Skill</td>
-          <td><b>meeting-minutes-hwpx</b> — 서식 명세·작성 지침·빈 양식·파이썬 도구 3종을
-            묶은 스킬. 커맨드와 에이전트가 공통으로 불러 씀</td>
-          <td><code>skills/meeting-minutes-hwpx/</code></td>
-          <td class="chk">✔</td>
-        </tr>
-        <tr>
-          <td>결과물</td>
-          <td>실제로 동작하는 HWPX 생성기 + 발표자료 PDF 그림 추출기 +
-            한글 렌더 검증 도구</td>
-          <td><code>skills/…/scripts/</code></td>
-          <td class="chk">✔</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
 
 <section id="use">
-  <h2><span class="num">02</span>구동 방법</h2>
+  <h2><span class="num">01</span>구동 방법</h2>
   <p class="sub">Claude Code 에서 슬래시 커맨드 한 줄로 실행합니다.
     제목과 자료 경로를 주면 자료를 읽고 본문을 쓰고 그림까지 골라 넣습니다.</p>
   <div class="card">
@@ -249,7 +219,7 @@ footer a{color:var(--accent)}
 </section>
 
 <section id="how">
-  <h2><span class="num">03</span>동작방식</h2>
+  <h2><span class="num">02</span>동작방식</h2>
   <p class="sub">사람이 확인하고 고칠 수 있도록 중간에 <b>개요 텍스트</b>를 남기는 것이 핵심입니다.
     결과가 마음에 안 들면 개요만 고쳐 다시 빌드합니다.</p>
   <div class="flow">
@@ -262,7 +232,7 @@ footer a{color:var(--accent)}
 </section>
 
 <section id="result">
-  <h2><span class="num">04</span>실제 결과물</h2>
+  <h2><span class="num">03</span>실제 결과물</h2>
   <p class="sub">발표자료 PDF 를 넣으면 개요를 거쳐 회의록이 나옵니다.
     가운데 개요는 <b>사람이 확인하고 고칠 수 있는 중간 산출물</b>입니다.</p>
 
@@ -335,7 +305,7 @@ footer a{color:var(--accent)}
 
 
 <section id="layout">
-  <h2><span class="num">05</span>저장소 구성</h2>
+  <h2><span class="num">04</span>저장소 구성</h2>
   <div class="card">
 <p class="tree"><b>commands/회의록.md</b>            슬래시 커맨드 — 자료 해석부터 검증까지의 진행 순서
 <b>agents/meeting-minutes.md</b>     서브에이전트 — 회의록 작성 전담
@@ -354,7 +324,7 @@ footer a{color:var(--accent)}
 </section>
 
 <section id="install">
-  <h2><span class="num">06</span>설치</h2>
+  <h2><span class="num">05</span>설치</h2>
   <p class="sub">저장소를 내려받아 설치 스크립트를 실행하면 <code>~/.claude</code> 아래로 복사됩니다.</p>
   <div class="grid2">
     <div class="card">
@@ -375,6 +345,47 @@ pip install lxml pymupdf pywin32</pre>
         설치 후 <code>defaults.example.json</code> 을 <code>defaults.json</code> 으로 복사해
         작성자·관리자·장소를 적어 두면 매번 입력하지 않아도 됩니다.</p>
     </div>
+  </div>
+</section>
+
+<section id="mission">
+  <h2><span class="num">06</span>미션 요구사항 대응</h2>
+  <p class="sub">4회차 미션 「문서 작성 에이전트 + 서브에이전트·Skill」 에 대해 만든 것과,
+    저장소 안에서 어디에 있는지입니다.</p>
+  <div class="card">
+    <table class="mission">
+      <thead><tr><th>요구</th><th>만든 것</th><th>위치</th><th></th></tr></thead>
+      <tbody>
+        <tr>
+          <td>문서 작성<br>에이전트</td>
+          <td><b>/회의록</b> 슬래시 커맨드 — 제목과 자료 경로를 주면 자료 읽기 → 빈 항목 질문 →
+            본문 작성 → 그림 선별 → 빌드 → 렌더 검증까지 한 번에 수행</td>
+          <td><code>commands/회의록.md</code></td>
+          <td class="chk">✔</td>
+        </tr>
+        <tr>
+          <td>서브에이전트</td>
+          <td><b>meeting-minutes</b> — 회의록 작성만 전담하는 에이전트.
+            자료 해석·문체·그림 선별 기준을 따로 갖고 동작</td>
+          <td><code>agents/meeting-minutes.md</code></td>
+          <td class="chk">✔</td>
+        </tr>
+        <tr>
+          <td>Skill</td>
+          <td><b>meeting-minutes-hwpx</b> — 서식 명세·작성 지침·빈 양식·파이썬 도구 3종을
+            묶은 스킬. 커맨드와 에이전트가 공통으로 불러 씀</td>
+          <td><code>skills/meeting-minutes-hwpx/</code></td>
+          <td class="chk">✔</td>
+        </tr>
+        <tr>
+          <td>결과물</td>
+          <td>실제로 동작하는 HWPX 생성기 + 발표자료 PDF 그림 추출기 +
+            한글 렌더 검증 도구</td>
+          <td><code>skills/…/scripts/</code></td>
+          <td class="chk">✔</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </section>
 
