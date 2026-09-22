@@ -137,7 +137,25 @@ pre code{background:none;border:0;padding:0}
 .shot img{display:block;width:100%;height:auto}
 .shot span{position:absolute;left:7px;top:7px;background:rgba(15,19,25,.72);color:#fff;
   font-size:10.5px;padding:2px 8px;border-radius:99px}
-.cap{font-size:12.5px;color:var(--ink-3);margin-top:9px;text-align:center}
+.cap{font-size:12.5px;color:var(--ink-3);margin-top:9px;text-align:center;line-height:1.6}
+
+/* 입력 — 발표자료 PDF */
+.upload{display:flex;align-items:center;gap:13px;padding:15px 17px;border-radius:11px;
+  background:var(--panel);border:1.5px dashed var(--line);transition:.16s}
+.upload:hover{border-color:var(--accent)}
+.upload .pdf{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;
+  background:var(--accent-soft);color:var(--accent);flex:none}
+.upload .pdf svg{width:22px;height:22px}
+.upload .meta{display:flex;flex-direction:column;min-width:0}
+.upload .meta b{font-size:14px;font-weight:700;overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap}
+.upload .meta em{font-style:normal;font-size:12.5px;color:var(--ink-3);margin-top:1px}
+.upnote{margin:11px 0 0;font-size:13.3px;color:var(--ink-2);line-height:1.68}
+.down{text-align:center;font-size:12.5px;font-weight:600;color:var(--accent);
+  margin:16px 0 14px;letter-spacing:.02em}
+.h3 .edit{margin-left:auto;font-style:normal;font-size:11px;font-weight:600;
+  color:var(--ink-3);background:var(--panel-2);border:1px solid var(--line);
+  border-radius:99px;padding:2px 9px;letter-spacing:0}
 
 /* ---------------- misc ---------------- */
 ul{margin:9px 0 0;padding-left:19px;color:var(--ink-2);font-size:14px}
@@ -249,7 +267,7 @@ footer a{color:var(--accent)}
 
 <!-- =================== 3. 동작 =================== -->
 <section id="how">
-  <h2><span class="num">03</span>어떻게 동작하나</h2>
+  <h2><span class="num">03</span>동작방식</h2>
   <p class="sub">사람이 확인하고 고칠 수 있도록 중간에 <b>개요 텍스트</b>를 남기는 것이 핵심입니다.
     결과가 마음에 안 들면 개요만 고쳐 다시 빌드합니다.</p>
   <div class="flow">
@@ -264,13 +282,29 @@ footer a{color:var(--accent)}
 <!-- =================== 4. 결과물 =================== -->
 <section id="result">
   <h2><span class="num">04</span>실제 결과물</h2>
-  <p class="sub">아래 왼쪽 개요를 넣어 오른쪽 문서가 나왔습니다.
-    가상 예시 자료이며, 저장소의 <code>examples/sample_outline.txt</code> 로 그대로 재현됩니다.</p>
+  <p class="sub">발표자료 PDF 를 넣으면 개요를 거쳐 회의록이 나옵니다.
+    가운데 개요는 <b>사람이 확인하고 고칠 수 있는 중간 산출물</b>입니다.</p>
 
   <div class="result">
     <div>
-      <div class="h3"><span class="dot"></span>입력 — 개요 텍스트</div>
-      <pre><span class="c"># 완성된 회의록 모양 그대로 적습니다</span>
+      <div class="h3"><span class="dot"></span>입력 — 발표자료 PDF</div>
+      <div class="upload">
+        <span class="pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <path d="M14 2v6h6"/></svg>
+        </span>
+        <span class="meta"><b>완료보고_발표자료.pdf</b>
+          <em>72쪽 · 개념도와 화면 캡처 포함</em></span>
+      </div>
+      <p class="upnote">자료를 읽어 <b>쪽별 내용과 그림 후보</b>를 뽑아내고,
+        본문에서 다룬 내용을 보여 주는 그림만 골라 씁니다.</p>
+
+      <div class="down">↓ 자동 생성</div>
+
+      <div class="h3"><span class="dot"></span>중간 — 개요 텍스트 <i class="edit">고칠 수 있음</i></div>
+      <pre><span class="c"># 완성된 회의록 모양 그대로 만들어집니다</span>
 제목: 통합 예약시스템 도입 검토를 위한 간담회
 일시: 2026년 3월 4일 14시
 작성자: 홍길동
@@ -310,108 +344,37 @@ footer a{color:var(--accent)}
         <a class="shot" href="docs/img/output-p2.png" target="_blank" rel="noopener" title="클릭하면 원본 크기로 열립니다"><span>2쪽</span><img src="docs/img/output-p2.png" alt="생성된 회의록 2쪽 — 검토사항과 추후 일정"></a>
       </div>
       <p class="cap">제목표 · 절 표제 · 글머리 위계 · 세로 병합 표 · 합계행 음영 · 쪽번호까지
-        양식 그대로</p>
+        양식 그대로 &nbsp;·&nbsp; 이미지를 누르면 원본 크기<br>
+        <span style="opacity:.8">위 문서는 저장소의
+        <code style="font-size:11px">examples/sample_outline.txt</code> 로 그대로 재현됩니다</span></p>
     </div>
   </div>
 </section>
 
 <!-- =================== 5. 사용법 =================== -->
 <section id="use">
-  <h2><span class="num">05</span>쓰는 방법</h2>
-  <p class="sub">셋 다 같은 엔진을 씁니다. 결과 서식은 동일합니다.</p>
-  <div class="grid3">
-    <div class="card">
-      <div class="h3"><span class="dot"></span>Claude Code</div>
-      <p style="margin:0 0 10px;color:var(--ink-2);font-size:13.8px">
-        자료를 읽고 <b>본문까지 써 줍니다.</b> 그림도 알아서 고릅니다.</p>
-      <pre style="font-size:12px">/회의록 ○○ 간담회 ./자료.pdf
+  <h2><span class="num">05</span>구동 방법</h2>
+  <p class="sub">Claude Code 에서 슬래시 커맨드 한 줄로 실행합니다.
+    제목과 자료 경로를 주면 자료를 읽고 본문을 쓰고 그림까지 골라 넣습니다.</p>
+  <div class="card">
+    <pre>/회의록 ○○ 추진방향 검토를 위한 간담회  ./자료.pdf
 
-<span class="c"># 인자 없이도 동작</span>
+<span class="c"># 인자 없이 실행하면 폴더를 훑어 후보 회의를 찾아 물어봅니다</span>
 /회의록</pre>
-    </div>
-    <div class="card">
-      <div class="h3"><span class="dot"></span>개요 파일 직접 작성</div>
-      <p style="margin:0;color:var(--ink-2);font-size:13.8px">
-        Claude 없이 씁니다. 서식 파일을 복사해 메모장으로 채운 뒤 명령 한 줄로 빌드합니다.</p>
-      <pre style="margin-top:10px;font-size:12px"><span class="k">python</span> build_minutes.py \
-   개요.txt --pdf --open</pre>
-    </div>
-    <div class="card">
-      <div class="h3"><span class="dot"></span>그림만 뽑기</div>
-      <p style="margin:0;color:var(--ink-2);font-size:13.8px">
-        발표자료에서 개념도·캡처만 잘라내 따로 쓸 수도 있습니다.</p>
-      <pre style="margin-top:10px;font-size:12px"><span class="k">python</span> extract_figures.py \
-   "발표자료.pdf" -o ./_추출</pre>
-    </div>
+    <ul style="margin-top:15px">
+      <li>자료는 <b>발표자료 PDF · 보고서 · 회의 메모 · 붙여넣은 텍스트</b> 무엇이든 됩니다.
+        스캔 PDF 는 쪽을 이미지로 읽습니다.</li>
+      <li>일시·장소처럼 자료에서 확인되지 않는 항목은 <b>한 번에 모아</b> 물어봅니다.</li>
+      <li>결과는 자료가 있던 폴더에 <code>.hwpx</code> · 확인용 <code>.pdf</code> ·
+        개요 <code>.txt</code> 가 함께 생깁니다. 고칠 때는 <b>개요 파일만</b> 손보면 됩니다.</li>
+    </ul>
   </div>
 </section>
 
-<!-- =================== 6. 기술 =================== -->
-<section id="tech">
-  <h2><span class="num">06</span>까다로웠던 부분</h2>
-  <p class="sub">단순 치환으로는 안 되는 지점들입니다. 만들면서 실제로 막혔고 고친 것만 적었습니다.</p>
-
-  <div class="grid2">
-    <div class="card">
-      <div class="h3"><span class="dot"></span>서식을 원본과 똑같이</div>
-      <ul>
-        <li>HWPX 는 zip 안에 XML 이 든 형식입니다. 서식을 새로 만들지 않고
-          <b>기존 양식 파일의 자원을 그대로 참조</b>했습니다.</li>
-        <li><code>header.xml</code> 의 글꼴·문단·테두리 정의는 건드리지 않고
-          본문용 자원만 <b>추가</b>(테두리 1 · 글자 8 · 문단 10개)</li>
-        <li><code>section0.xml</code> 은 <b>제목표 값 칸 6개와 본문 칸 하나만</b> 교체.
-          용지·여백·쪽번호와 표제 박스는 손대지 않음</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <div class="h3"><span class="dot"></span>발표자료에서 그림 찾기</div>
-      <ul>
-        <li>쪽 안의 이미지·벡터 도형 위치를 격자에 찍고 <b>붙어 있는 것끼리 묶어</b>
-          하나의 그림으로 봅니다</li>
-        <li>배경판·로고·머리글은 크기로, <b>간지 슬라이드</b>는 글자 수로 걸러냅니다</li>
-        <li><b>빈 프레임</b>(캡처가 안 붙은 빈 박스)은 저해상도로 다시 렌더해
-          배경색과 다른 픽셀 비율을 재서 판단합니다 — 실제로 후보 45장 중 7장이 빈 껍데기였습니다</li>
-        <li>발표자료 폰트가 괄호·화살표를 CJK 호환 문자로 심어 둔 경우
-          (<code>㏙2단계㏚</code>) 되돌리고, <b>뜻이 애매한 글자는 고치지 않고 보고</b>합니다</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <div class="h3"><span class="dot"></span>표는 자동으로 계산</div>
-      <ul>
-        <li>열 폭을 내용 길이에 맞춰 배분하고, 한 줄에 들어가는 열은 가운데·
-          줄바꿈이 생기는 열은 왼쪽으로 <b>정렬까지 자동</b> 결정</li>
-        <li>같은 값이 이어지면 <code>^</code> 로 세로 병합,
-          행 앞 <code>=</code> 로 합계행 음영</li>
-        <li><b>행·열이 뚜렷한 표 그래픽은 그림이 아니라 표로 옮기도록</b> 지침에 넣었습니다.
-          글자가 선명하고 쪽 경계에서도 잘 흐릅니다</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <div class="h3"><span class="dot"></span>만들고 끝내지 않기</div>
-      <ul>
-        <li>생성 후 한글로 <b>PDF 로 변환해 쪽별 이미지로 렌더</b>하고,
-          표 잘림·그림 넘침·쪽수 초과를 직접 확인합니다</li>
-        <li>자료에서 확인되지 않은 항목은 <code>empty_fields</code> 로 보고해
-          <b>비어 있음을 감추지 않습니다</b></li>
-        <li>자료에 없는 내용은 만들지 않고 「검토 필요사항」 에 남깁니다</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="note">
-    <b>한계</b> — 표나 그림이 쪽 경계에 걸리면 한글이 통째로 다음 쪽으로 넘겨
-    앞 쪽 아래가 비어 보일 수 있습니다. 도구가 고칠 수 없는 부분이라 미리보기로 확인하고
-    절 순서나 그림 위치를 조정해야 합니다. 또한 결과 확인과 PDF 변환에 한컴오피스 한글이
-    필요합니다(LibreOffice 는 HWPX 를 읽지 못합니다).
-  </div>
-</section>
 
 <!-- =================== 7. 구성 =================== -->
 <section id="layout">
-  <h2><span class="num">07</span>저장소 구성</h2>
+  <h2><span class="num">06</span>저장소 구성</h2>
   <div class="card">
 <p class="tree"><b>commands/회의록.md</b>            슬래시 커맨드 — 자료 해석부터 검증까지의 진행 순서
 <b>agents/meeting-minutes.md</b>     서브에이전트 — 회의록 작성 전담
@@ -431,7 +394,7 @@ footer a{color:var(--accent)}
 
 <!-- =================== 8. 설치 =================== -->
 <section id="install">
-  <h2><span class="num">08</span>설치</h2>
+  <h2><span class="num">07</span>설치</h2>
   <p class="sub">저장소를 내려받아 설치 스크립트를 실행하면 <code>~/.claude</code> 아래로 복사됩니다.</p>
   <div class="grid2">
     <div class="card">
