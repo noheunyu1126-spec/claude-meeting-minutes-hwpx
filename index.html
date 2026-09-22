@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>회의록 작성 에이전트</title>
 <meta name="description" content="발표자료 PDF 하나로 「회의록」 양식 HWPX 문서를 만드는 Claude Code 스킬 · 서브에이전트 · 슬래시 커맨드">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.min.css">
 <style>
 :root{
   --bg:#f4f6f9; --panel:#fff; --panel-2:#f7f9fc; --ink:#14181e; --ink-2:#4b5563;
@@ -12,7 +14,7 @@
   --accent:#2f5597; --accent-ink:#fff; --accent-soft:#dde5f6;
   --ok:#0f7a45; --ok-soft:#e4f4ec; --warn:#8a5a00; --warn-soft:#fff6e3;
   --mono:"Consolas","D2Coding","Malgun Gothic",ui-monospace,monospace;
-  --sans:"Malgun Gothic","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;
+  --sans:Pretendard,"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
   --r:12px; --sh:0 1px 2px rgba(16,24,40,.05),0 6px 20px rgba(16,24,40,.05);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -32,7 +34,9 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
-  font-size:15px;line-height:1.68;-webkit-font-smoothing:antialiased}
+  font-size:15px;line-height:1.72;-webkit-font-smoothing:antialiased;
+  letter-spacing:-.008em;word-break:keep-all;overflow-wrap:break-word}
+pre,code,.tree{word-break:normal;overflow-wrap:normal}
 .wrap{max-width:1000px;margin:0 auto;padding:0 18px}
 
 /* ---------------- hero ---------------- */
